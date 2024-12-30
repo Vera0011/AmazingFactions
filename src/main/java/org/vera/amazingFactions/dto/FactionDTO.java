@@ -1,14 +1,14 @@
-package org.vera.amazingFactions.types;
+package org.vera.amazingFactions.dto;
 
-import java.util.ArrayList;
+import java.util.Set;
 
-public class Faction {
+public class FactionDTO {
     private String name;
     private String description;
-    private ArrayList<String> users;
+    private Set<String> users;
     private String leader;
 
-    public Faction(String name, String description, ArrayList<String> users, String leader) {
+    public FactionDTO(String name, String description, Set<String> users, String leader) {
         this.name = name;
         this.description = description;
         this.users = users;
@@ -35,11 +35,11 @@ public class Faction {
         return description;
     }
 
-    public ArrayList<String> getUsers() {
+    public Set<String> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<String> users) {
+    public void setUsers(Set<String> users) {
         this.users = users;
     }
 

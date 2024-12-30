@@ -18,7 +18,6 @@ public class DatabaseConnector {
 
     public DatabaseConnector(String databaseName) {
         this.databaseName = databaseName;
-        connection = null;
     }
 
     /**
@@ -48,7 +47,7 @@ public class DatabaseConnector {
      *
      * @return
      */
-    public static Connection getConnection() {
+    public Connection getConnection() {
         return connection;
     }
 
@@ -72,7 +71,8 @@ public class DatabaseConnector {
      * @return
      */
     public boolean executeInitialization() {
-        try (Connection conn = connection) {
+        try {
+            Connection conn = getConnection();
             Statement stmt = conn.createStatement();
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sql/initialization.sql");
             try {

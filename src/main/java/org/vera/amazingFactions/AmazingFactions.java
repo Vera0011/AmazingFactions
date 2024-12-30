@@ -7,13 +7,14 @@ import org.vera.amazingFactions.internal.DatabaseConnector;
 import java.util.Objects;
 
 public final class AmazingFactions extends JavaPlugin {
-    private DatabaseConnector database;
+    public static DatabaseConnector database;
 
     @Override
     public void onEnable() {
+        boolean result = this.databaseConnect();
+
         this.loadCommands();
         this.loadEvents();
-        boolean result = this.databaseConnect();
 
         if (result) getLogger().info("Amazing Factions is enabled.");
     }

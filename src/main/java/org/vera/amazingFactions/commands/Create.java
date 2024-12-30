@@ -8,9 +8,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.services.FactionService;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class Create implements CommandExecutor {
+    private static FactionService factionService = new FactionService();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -46,7 +48,8 @@ public class Create implements CommandExecutor {
             users.add(leaderUUID);
         }
 
-        //FactionService.createFaction(name, description, users, leaderUUID);
+
+        factionService.createFaction(name, description, users, leaderUUID);
 
         currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - You created a new faction." +
                 ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +

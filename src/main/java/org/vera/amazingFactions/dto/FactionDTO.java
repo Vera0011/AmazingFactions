@@ -10,8 +10,18 @@ public class FactionDTO {
     private UUID leader;
     private int id;
 
+    /**
+     * Suppercharging the class to allow multiple constructors
+     */
     public FactionDTO(int id, String name, String description, Set<UUID> users, UUID leader) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.users = users;
+        this.leader = leader;
+    }
+
+    public FactionDTO(String name, String description, Set<UUID> users, UUID leader) {
         this.name = name;
         this.description = description;
         this.users = users;

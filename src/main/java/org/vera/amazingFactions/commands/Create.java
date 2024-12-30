@@ -22,11 +22,12 @@ public class Create implements CommandExecutor {
 
             String name = args[0];
             String description = args[1];
-            Set<String> users = new HashSet<>();
-            String leader = currentPlayer.getName();
+            Set<UUID> users = new HashSet<>();
+            UUID leaderUUID = currentPlayer.getUniqueId();
 
             // Adds multiple users, or only one (the leader, executor of the command)
             if (args.length > 2) {
+                String leader = currentPlayer.getName();
                 String[] userArgs = Arrays.copyOfRange(args, 2, args.length);
                 userArgs[userArgs.length - 1] = leader;
 
@@ -37,19 +38,14 @@ public class Create implements CommandExecutor {
                     Player validUser = Bukkit.getPlayer(user);
 
                     if (validUser != null) {
-                        users.add(validUser.getUniqueId().toString());
+                        users.add(validUser.getUniqueId());
                     }
                 }
             } else {
-                Player leaderPlayer = Bukkit.getPlayer(leader);
-
-                if (leaderPlayer != null) {
-                    users.add(currentPlayer.getUniqueId().toString());
-                } else
-                    return false;
+                users.add(leaderUUID);
             }
 
-            FactionService.createFaction(name, description, users, leader);
+            FactionService.createFaction(name, description, users, leaderUUID);
 
             currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - You created a new faction." +
                     ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +

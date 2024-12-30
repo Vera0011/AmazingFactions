@@ -4,13 +4,13 @@ public class ItemDTO {
     private int id;
     private String name;
     private String description;
-    private String faction_id;
+    private String factionId;
 
-    public ItemDTO(int id, String name, String description, String faction_id) {
+    public ItemDTO(int id, String name, String description, String factionId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.faction_id = faction_id;
+        this.factionId = factionId;
     }
 
     public int getId() {
@@ -37,11 +37,11 @@ public class ItemDTO {
         this.description = description;
     }
 
-    public String getFaction_id() {
-        return faction_id;
+    public String getFactionId() {
+        return factionId;
     }
 
-    public void setFaction_id(String faction_id) {
-        this.faction_id = faction_id;
+    public void setFactionId(String factionId) {
+        this.factionId = factionId;
     }
 }

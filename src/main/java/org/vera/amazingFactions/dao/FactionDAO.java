@@ -1,4 +1,4 @@
-package org.vera.amazingFactions.daos;
+package org.vera.amazingFactions.dao;
 
 import org.vera.amazingFactions.dto.FactionDTO;
 

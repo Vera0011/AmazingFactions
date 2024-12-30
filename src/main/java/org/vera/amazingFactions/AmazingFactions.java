@@ -39,12 +39,12 @@ public final class AmazingFactions extends JavaPlugin {
      * @return true if the connection was successfully
      */
     private boolean databaseConnect() {
-        database = new DatabaseConnector("AmazingFactions.db");
+        database = new DatabaseConnector("AmazingFactions");
 
         try {
             database.connect();
 
-            return true;
+            return database.executeInitialization();
         } catch (SQLException e) {
             getLogger().severe("Error while connecting to the database: " + e.getMessage());
             getLogger().severe("Amazing Factions could not be loaded.");

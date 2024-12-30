@@ -1,6 +1,5 @@
 package org.vera.amazingFactions.dto;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class FactionDTO {

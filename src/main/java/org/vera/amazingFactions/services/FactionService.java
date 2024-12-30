@@ -1,6 +1,6 @@
 package org.vera.amazingFactions.services;
 
-import org.vera.amazingFactions.daos.FactionDAO;
+import org.vera.amazingFactions.dao.FactionDAO;
 import org.vera.amazingFactions.dto.FactionDTO;
 
 import java.util.Set;

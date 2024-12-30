@@ -8,12 +8,26 @@ public class FactionDTO {
     private String description;
     private Set<UUID> users;
     private UUID leader;
+    private int id;
 
-    public FactionDTO(String name, String description, Set<UUID> users, UUID leader) {
+    public FactionDTO(int id, String name, String description, Set<UUID> users, UUID leader) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.users = users;
         this.leader = leader;
+    }
+
+    public void setLeader(UUID leader) {
+        this.leader = leader;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void modifyLeader(UUID newLeader) {

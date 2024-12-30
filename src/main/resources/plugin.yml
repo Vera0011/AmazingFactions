@@ -4,7 +4,7 @@ main: org.vera.amazingFactions.AmazingFactions
 api-version: '1.20'
 commands:
   create:
-    description: Adds a user to a material cooldown
+    description: Creates a new faction
     permission: amazing-factions.create
 
 softdepend: [PlaceholderAPI]

@@ -1,33 +1,48 @@
 package org.vera.amazingFactions.dto;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class FactionDTO {
     private String name;
     private String description;
-    private Set<String> users;
-    private String leader;
+    private Set<UUID> users;
+    private UUID leader;
+    private int id;
 
-    public FactionDTO(String name, String description, Set<String> users, String leader) {
+    public FactionDTO(int id, String name, String description, Set<UUID> users, UUID leader) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.users = users;
         this.leader = leader;
     }
 
-    public void modifyLeader(String newLeader) {
+    public void setLeader(UUID leader) {
+        this.leader = leader;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void modifyLeader(UUID newLeader) {
         this.leader = newLeader;
     }
 
-    public String getLeader() {
+    public UUID getLeader() {
         return this.leader;
     }
 
-    public void removeUser(String user) {
+    public void removeUser(UUID user) {
         this.users.remove(user);
     }
 
-    public void addUser(String user) {
+    public void addUser(UUID user) {
         this.users.add(user);
     }
 
@@ -35,11 +50,11 @@ public class FactionDTO {
         return description;
     }
 
-    public Set<String> getUsers() {
+    public Set<UUID> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<String> users) {
+    public void setUsers(Set<UUID> users) {
         this.users = users;
     }
 

@@ -11,7 +11,6 @@ import static org.bukkit.Bukkit.getLogger;
 public class DatabaseConnector {
     private Connection connection;
     private final String databaseName;
-    private String path;
 
     public DatabaseConnector(String databaseName) {
         this.databaseName = databaseName;
@@ -23,8 +22,6 @@ public class DatabaseConnector {
         if (!dataFolder.exists()) {
             dataFolder.getParentFile().mkdirs();
         }
-
-        this.path = dataFolder.getAbsolutePath();
 
         String url = "jdbc:sqlite:" + dataFolder.getAbsolutePath();
         connection = DriverManager.getConnection(url);
@@ -40,6 +37,10 @@ public class DatabaseConnector {
         }
     }
 
+    /**
+     * Executes the database creation (tables, foreign keys...)
+     * @return
+     */
     public boolean executeInitialization() {
         try (Connection conn = this.connection) {
             Statement stmt = conn.createStatement();

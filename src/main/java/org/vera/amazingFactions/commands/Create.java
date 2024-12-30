@@ -23,7 +23,7 @@ public class Create implements CommandExecutor {
             String name = args[0];
             String description = args[1];
             Set<String> users = new HashSet<>();
-            String leader = currentPlayer.getUniqueId().toString();
+            String leader = currentPlayer.getName();
 
             // Adds multiple users, or only one (the leader, executor of the command)
             if (args.length > 2) {
@@ -41,7 +41,12 @@ public class Create implements CommandExecutor {
                     }
                 }
             } else {
-                users.add(leader);
+                Player leaderPlayer = Bukkit.getPlayer(leader);
+
+                if (leaderPlayer != null) {
+                    users.add(currentPlayer.getUniqueId().toString());
+                } else
+                    return false;
             }
 
             FactionService.createFaction(name, description, users, leader);

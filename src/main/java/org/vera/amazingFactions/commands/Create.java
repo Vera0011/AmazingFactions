@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.vera.amazingFactions.types.Faction;
+import org.vera.amazingFactions.services.FactionService;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class Create implements CommandExecutor {
 
             String name = args[0];
             String description = args[1];
-            ArrayList<String> users = new ArrayList<>();
+            Set<String> users = new HashSet<>();
             String leader = currentPlayer.getUniqueId().toString();
 
             // Adds multiple users, or only one (the leader, executor of the command)
@@ -44,7 +44,7 @@ public class Create implements CommandExecutor {
                 users.add(leader);
             }
 
-            new Faction(name, description, users, leader);
+            FactionService.createFaction(name, description, users, leader);
 
             currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - You created a new faction." +
                     ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +

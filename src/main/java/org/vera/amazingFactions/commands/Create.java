@@ -6,18 +6,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.vera.amazingFactions.dto.FactionDTO;
+import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.services.FactionService;
 
 import java.util.*;
 
 public class Create implements CommandExecutor {
+    private static FactionService factionService = new FactionService();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player currentPlayer = (Player) sender;
 
         if (args.length < 2) {
-            currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - Usage: /create <name> <description> <list of the users>");
+            MessageHandler.sendInfoMessage(currentPlayer, "Usage: /create <name> <description> <list of the users>");
             return true;
         }
 
@@ -46,13 +49,15 @@ public class Create implements CommandExecutor {
             users.add(leaderUUID);
         }
 
-        //FactionService.createFaction(name, description, users, leaderUUID);
+        FactionDTO createdFaction = factionService.createFaction(currentPlayer, name, description, users, leaderUUID);
 
-        currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - You created a new faction." +
-                ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +
-                ChatColor.AQUA + "\n|| -->  Description: " + ChatColor.GREEN + description +
-                ChatColor.AQUA + "\n|| -->  Leader: " + ChatColor.GREEN + currentPlayer.getName() +
-                ChatColor.AQUA + "\n|| -->  Number of users: " + ChatColor.GREEN + users.size());
+        if (createdFaction != null) {
+            MessageHandler.sendInfoMessage(currentPlayer, "A new faction was created" +
+                    ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +
+                    ChatColor.AQUA + "\n|| -->  Description: " + ChatColor.GREEN + description +
+                    ChatColor.AQUA + "\n|| -->  Leader: " + ChatColor.GREEN + currentPlayer.getName() +
+                    ChatColor.AQUA + "\n|| -->  Number of users: " + ChatColor.GREEN + users.size());
+        }
 
         return true;
     }

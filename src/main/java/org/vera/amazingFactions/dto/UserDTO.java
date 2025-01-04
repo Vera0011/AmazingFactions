@@ -6,15 +6,15 @@ public class UserDTO {
     private UUID uuid;
     private String userName;
     private int faction;
-    private String faction_rank;
-    private int faction_xp;
+    private String factionRank;
+    private int factionXP;
 
-    public UserDTO(UUID uuid, String userName, int faction, String faction_rank, int faction_xp) {
+    public UserDTO(UUID uuid, String userName, int faction, String factionRank, int factionXP) {
         this.uuid = uuid;
         this.userName = userName;
         this.faction = faction;
-        this.faction_rank = faction_rank;
-        this.faction_xp = faction_xp;
+        this.factionRank = factionRank;
+        this.factionXP = factionXP;
     }
 
     public UUID getUuid() {
@@ -41,19 +41,19 @@ public class UserDTO {
         this.faction = faction;
     }
 
-    public String getFaction_rank() {
-        return faction_rank;
+    public String getfactionRank() {
+        return factionRank;
     }
 
-    public void setFaction_rank(String faction_rank) {
-        this.faction_rank = faction_rank;
+    public void setfactionRank(String factionRank) {
+        this.factionRank = factionRank;
     }
 
-    public int getFaction_xp() {
-        return faction_xp;
+    public int getfactionXP() {
+        return factionXP;
     }
 
-    public void setFaction_xp(int faction_xp) {
-        this.faction_xp = faction_xp;
+    public void setfactionXP(int factionXP) {
+        this.factionXP = factionXP;
     }
 }

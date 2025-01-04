@@ -17,32 +17,11 @@ public class FactionService {
         return factionDAO.createFaction(actualPlayer, newFaction);
     }
 
-    /*public FactionDTO getFactionByLeader(UUID leaderId) throws SQLException {
-        return factionDAO.getFactionByLeader(leaderId);
+    public boolean deleteFaction(Player actualPlayer, FactionDTO faction) {
+        return factionDAO.deleteFaction(actualPlayer, faction);
     }
 
-    public FactionDTO getFactionById(int factionId) throws SQLException {
-        return factionDAO.getFactionById(factionId);
-    }
-
-    public FactionDTO getFactionByName(String factionName) throws SQLException {
-        return factionDAO.getFactionByName(factionName);
-    }
-
-    public Set<FactionDTO> getFactions() throws SQLException {
-        return factionDAO.getFactions();
-    }
-
-    public Set<UserDTO> getUsersFromFaction(int factionId) throws SQLException {
-        return factionDAO.getUsersFromFaction(factionId);
-    }
-
-    public FactionDTO updateFaction(FactionDTO factionDTO) throws SQLException {
-        return factionDAO.updateFaction(factionDTO);
-    }
-
-    */
-    public boolean deleteFaction(Player actualPlayer, int factionId) {
-        return factionDAO.deleteFaction(actualPlayer, factionId);
+    public FactionDTO getFactionByLeader(Player actualPlayer) {
+        return factionDAO.getFactionByLeader(actualPlayer, actualPlayer.getUniqueId());
     }
 }

@@ -1,8 +1,8 @@
 package org.vera.amazingFactions;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.vera.amazingFactions.commands.Create;
-import org.vera.amazingFactions.commands.Delete;
+import org.vera.amazingFactions.interactions.commands.factions.Create;
+import org.vera.amazingFactions.interactions.commands.factions.Delete;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.internal.DatabaseConnector;
 

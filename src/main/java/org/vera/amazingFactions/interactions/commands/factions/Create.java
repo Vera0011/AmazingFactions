@@ -1,4 +1,4 @@
-package org.vera.amazingFactions.commands;
+package org.vera.amazingFactions.interactions.commands.factions;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.vera.amazingFactions.dto.FactionDTO;
+import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.services.FactionService;
 
@@ -17,9 +17,9 @@ public class Create implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player currentPlayer = (Player) sender;
+        if (sender instanceof Player) {
+            Player currentPlayer = (Player) sender;
 
-        if (currentPlayer != null) {
             if (args.length < 2) {
                 MessageHandler.sendInfoMessage(currentPlayer, "Usage: /create <faction name> <faction description> <list of the users>");
                 return true;

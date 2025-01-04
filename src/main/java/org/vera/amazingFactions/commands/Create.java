@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.services.FactionService;
 
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class Create implements CommandExecutor {
         Player currentPlayer = (Player) sender;
 
         if (args.length < 2) {
-            currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - Usage: /create <name> <description> <list of the users>");
+            MessageHandler.sendInfoMessage(currentPlayer, "Usage: /create <name> <description> <list of the users>");
             return true;
         }
 
@@ -49,9 +50,9 @@ public class Create implements CommandExecutor {
         }
 
 
-        factionService.createFaction(name, description, users, leaderUUID);
+        //factionService.createFaction(name, description, users, leaderUUID);
 
-        currentPlayer.sendMessage(ChatColor.RED + "[AmazingFactions]" + ChatColor.GOLD + " - You created a new faction." +
+        MessageHandler.sendInfoMessage(currentPlayer, "A new faction was created" +
                 ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +
                 ChatColor.AQUA + "\n|| -->  Description: " + ChatColor.GREEN + description +
                 ChatColor.AQUA + "\n|| -->  Leader: " + ChatColor.GREEN + currentPlayer.getName() +

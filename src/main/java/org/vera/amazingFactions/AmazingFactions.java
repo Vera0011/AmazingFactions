@@ -2,6 +2,7 @@ package org.vera.amazingFactions;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.vera.amazingFactions.commands.Create;
+import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.internal.DatabaseConnector;
 
 import java.util.Objects;
@@ -16,13 +17,13 @@ public final class AmazingFactions extends JavaPlugin {
         this.loadCommands();
         this.loadEvents();
 
-        if (result) getLogger().info("Amazing Factions is enabled.");
+        if (result) MessageHandler.sendInfoMessage("Amazing Factions is enabled.");
     }
 
     @Override
     public void onDisable() {
         this.databaseDisconnect();
-        getLogger().info("Amazing Factions is disabled");
+        MessageHandler.sendInfoMessage("Amazing Factions is disabled");
     }
 
     private void loadCommands() {

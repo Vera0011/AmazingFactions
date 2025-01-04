@@ -1,6 +1,7 @@
 package org.vera.amazingFactions.internal;
 
 import org.vera.amazingFactions.AmazingFactions;
+import org.vera.amazingFactions.handlers.MessageHandler;
 
 import java.io.*;
 import java.sql.*;
@@ -35,8 +36,8 @@ public class DatabaseConnector {
             try {
                 connection = DriverManager.getConnection(url);
             } catch (SQLException e) {
-                getLogger().severe("Error while connecting to the database: " + e.getMessage());
-                getLogger().severe("Amazing Factions could not be loaded.");
+                MessageHandler.sendErrorMessage("Error while connecting to the database: " + e.getMessage());
+                MessageHandler.sendErrorMessage("Amazing Factions could not be loaded.");
                 getServer().getPluginManager().disablePlugin(new AmazingFactions());
             }
         }
@@ -61,7 +62,7 @@ public class DatabaseConnector {
                 connection = null;
             }
         } catch (SQLException e) {
-            getLogger().severe("Error closing the database connection: " + e.getMessage());
+            MessageHandler.sendErrorMessage("Error closing the database connection: " + e.getMessage());
         }
     }
 
@@ -75,9 +76,10 @@ public class DatabaseConnector {
             Connection conn = getConnection();
             Statement stmt = conn.createStatement();
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sql/initialization.sql");
+
             try {
                 if (inputStream == null) {
-                    System.out.println("SQL File not found");
+                    MessageHandler.sendErrorMessage("SQL File not found - Database could not be loaded");
                     return false;
                 }
 
@@ -96,13 +98,13 @@ public class DatabaseConnector {
 
                 }
             } catch (IOException e) {
-                getLogger().severe("IO EXCEPTION: " + e.getMessage());
+                MessageHandler.sendErrorMessage("IO EXCEPTION while executing SQL file: " + e.getMessage());
                 return false;
             }
 
             return true;
         } catch (SQLException e) {
-            getLogger().severe("SQL EXCEPTION: " + e.getMessage());
+            MessageHandler.sendErrorMessage("SQL EXCEPTION while executing SQL file:" + e.getMessage());
             return false;
         }
     }

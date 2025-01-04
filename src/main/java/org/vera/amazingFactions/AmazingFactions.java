@@ -2,6 +2,7 @@ package org.vera.amazingFactions;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.vera.amazingFactions.commands.Create;
+import org.vera.amazingFactions.commands.Delete;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.internal.DatabaseConnector;
 
@@ -28,6 +29,7 @@ public final class AmazingFactions extends JavaPlugin {
 
     private void loadCommands() {
         Objects.requireNonNull(this.getCommand("create")).setExecutor(new Create());
+        Objects.requireNonNull(this.getCommand("delete")).setExecutor(new Delete());
     }
 
     private void loadEvents() {

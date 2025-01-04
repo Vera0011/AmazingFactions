@@ -4,14 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.AmazingFactions;
 import org.vera.amazingFactions.dto.FactionDTO;
-import org.vera.amazingFactions.dto.UserDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
-import org.vera.amazingFactions.internal.DatabaseConnector;
 
 import java.sql.*;
 import java.util.*;
-
-import static org.bukkit.Bukkit.getLogger;
 
 public class FactionDAO {
     private Connection connection;
@@ -20,6 +16,13 @@ public class FactionDAO {
         connection = AmazingFactions.database.getConnection();
     }
 
+    /**
+     * Creates a new faction
+     *
+     * @param actualPlayer The command executor
+     * @param factionDTO   The faction to create
+     * @return
+     */
     public FactionDTO createFaction(Player actualPlayer, FactionDTO factionDTO) {
         String query = "INSERT INTO Factions (name, description, leaderId) VALUES (?, ?, ?)";
         String userQuery = "INSERT INTO Users (id, userName, factionId, factionRank) VALUES (?, ?, ?, ?)";
@@ -98,7 +101,14 @@ public class FactionDAO {
         }
     }
 
-    public boolean deleteFaction(Player actualPlayer, int factionId) {
+    /**
+     * Deletes a specific faction
+     *
+     * @param actualPlayer The command executor
+     * @param faction      The faction to remove
+     * @return
+     */
+    public boolean deleteFaction(Player actualPlayer, FactionDTO faction) {
         String query = "DELETE FROM Factions WHERE id = ?";
 
         try {
@@ -110,7 +120,7 @@ public class FactionDAO {
         }
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, factionId);
+            statement.setInt(1, faction.getId());
 
             statement.execute();
             connection.commit();
@@ -131,20 +141,43 @@ public class FactionDAO {
         }
     }
 
-    /*public FactionDTO getFactionByLeader(UUID leaderId) throws SQLException {
+    /**
+     * Queries the FactionDTO based on the leader UUID
+     *
+     * @param actualPlayer The command executor
+     * @param leaderUUID   The leader UUID
+     * @return
+     */
+    public FactionDTO getFactionByLeader(Player actualPlayer, UUID leaderUUID) {
+        String query = "SELECT * FROM Factions WHERE leaderId = ?";
+        FactionDTO factionDTO;
 
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, leaderUUID.toString());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    factionDTO = new FactionDTO();
+                    factionDTO.setId(resultSet.getInt("id"));
+                    factionDTO.setName(resultSet.getString("name"));
+                    factionDTO.setLeader(UUID.fromString(resultSet.getString("leaderId")));
+
+                    return factionDTO;
+                } else {
+                    MessageHandler.sendErrorMessage(actualPlayer, "You are not the leader of a faction");
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+                MessageHandler.sendErrorMessage(actualPlayer, "Unable to retrieve the faction");
+                return null;
+            } catch (SQLException ex) {
+                MessageHandler.sendErrorMessage(actualPlayer, "Internal error with database");
+                MessageHandler.sendErrorMessage("Internal error with database - " + ex.getMessage());
+                return null;
+            }
+        }
     }
-
-    public FactionDTO getFactionById(int factionId) throws SQLException {
-
-    }
-
-    public FactionDTO getFactionByName(String factionName) throws SQLException {
-    }
-
-    public Set<FactionDTO> getFactions() throws SQLException {
-    }
-
-    public Set<UserDTO> getUsersFromFaction(int factionId) throws SQLException {
-    }*/
 }

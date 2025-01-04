@@ -28,6 +28,9 @@ public class FactionDTO {
         this.leader = leader;
     }
 
+    public FactionDTO() {
+    }
+
     public void setLeader(UUID leader) {
         this.leader = leader;
     }

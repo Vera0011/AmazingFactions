@@ -1,20 +1,28 @@
 package org.vera.amazingFactions;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.vera.amazingFactions.interactions.commands.factions.Create;
 import org.vera.amazingFactions.interactions.commands.factions.Delete;
 import org.vera.amazingFactions.handlers.MessageHandler;
+import org.vera.amazingFactions.interactions.events.InventoryClick;
+import org.vera.amazingFactions.interactions.menus.Main;
+import org.vera.amazingFactions.interactions.menus.Menu;
 import org.vera.amazingFactions.internal.DatabaseConnector;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public final class AmazingFactions extends JavaPlugin {
     public static DatabaseConnector database;
+    public static Set<Menu> menus;
 
     @Override
     public void onEnable() {
         boolean result = this.databaseConnect();
 
+        this.loadMenus();
         this.loadCommands();
         this.loadEvents();
 
@@ -33,7 +41,18 @@ public final class AmazingFactions extends JavaPlugin {
     }
 
     private void loadEvents() {
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new InventoryClick(), this);
 
+        MessageHandler.sendInfoMessage("Events loaded");
+    }
+
+    private void loadMenus() {
+        menus = new HashSet<>();
+
+        menus.add(new Main());
+
+        MessageHandler.sendInfoMessage("Menus loaded");
     }
 
     /**

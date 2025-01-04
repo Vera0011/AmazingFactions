@@ -12,7 +12,7 @@ import org.vera.amazingFactions.services.FactionService;
 
 import java.util.*;
 
-public class Create implements CommandExecutor {
+public class FactionCreate implements CommandExecutor {
     private static FactionService factionService = new FactionService();
 
     @Override

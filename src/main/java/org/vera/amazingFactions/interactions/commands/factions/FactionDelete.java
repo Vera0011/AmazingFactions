@@ -8,7 +8,7 @@ import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.services.FactionService;
 
-public class Delete implements CommandExecutor {
+public class FactionDelete implements CommandExecutor {
     private static FactionService factionService = new FactionService();
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

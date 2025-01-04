@@ -1,5 +1,6 @@
 package org.vera.amazingFactions.services;
 
+import org.bukkit.entity.Player;
 import org.vera.amazingFactions.dao.FactionDAO;
 import org.vera.amazingFactions.dto.FactionDTO;
 import org.vera.amazingFactions.dto.UserDTO;
@@ -11,9 +12,9 @@ import java.util.UUID;
 public class FactionService {
     private final FactionDAO factionDAO = new FactionDAO();
 
-    public void createFaction(String name, String description, Set<UUID> users, UUID leader) {
+    public FactionDTO createFaction(Player actualPlayer, String name, String description, Set<UUID> users, UUID leader) {
         FactionDTO newFaction = new FactionDTO(name, description, users, leader);
-        factionDAO.createFaction(newFaction);
+        return factionDAO.createFaction(actualPlayer, newFaction);
     }
 
     /*public FactionDTO getFactionByLeader(UUID leaderId) throws SQLException {
@@ -34,5 +35,14 @@ public class FactionService {
 
     public Set<UserDTO> getUsersFromFaction(int factionId) throws SQLException {
         return factionDAO.getUsersFromFaction(factionId);
-    }*/
+    }
+
+    public FactionDTO updateFaction(FactionDTO factionDTO) throws SQLException {
+        return factionDAO.updateFaction(factionDTO);
+    }
+
+    */
+    public boolean deleteFaction(Player actualPlayer, int factionId) {
+        return factionDAO.deleteFaction(actualPlayer, factionId);
+    }
 }

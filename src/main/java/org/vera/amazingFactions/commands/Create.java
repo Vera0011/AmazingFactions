@@ -6,10 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.vera.amazingFactions.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.services.FactionService;
 
-import java.sql.SQLException;
 import java.util.*;
 
 public class Create implements CommandExecutor {
@@ -49,14 +49,15 @@ public class Create implements CommandExecutor {
             users.add(leaderUUID);
         }
 
+        FactionDTO createdFaction = factionService.createFaction(currentPlayer, name, description, users, leaderUUID);
 
-        //factionService.createFaction(name, description, users, leaderUUID);
-
-        MessageHandler.sendInfoMessage(currentPlayer, "A new faction was created" +
-                ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +
-                ChatColor.AQUA + "\n|| -->  Description: " + ChatColor.GREEN + description +
-                ChatColor.AQUA + "\n|| -->  Leader: " + ChatColor.GREEN + currentPlayer.getName() +
-                ChatColor.AQUA + "\n|| -->  Number of users: " + ChatColor.GREEN + users.size());
+        if (createdFaction != null) {
+            MessageHandler.sendInfoMessage(currentPlayer, "A new faction was created" +
+                    ChatColor.AQUA + "\n|| -->  Name: " + ChatColor.GREEN + name +
+                    ChatColor.AQUA + "\n|| -->  Description: " + ChatColor.GREEN + description +
+                    ChatColor.AQUA + "\n|| -->  Leader: " + ChatColor.GREEN + currentPlayer.getName() +
+                    ChatColor.AQUA + "\n|| -->  Number of users: " + ChatColor.GREEN + users.size());
+        }
 
         return true;
     }

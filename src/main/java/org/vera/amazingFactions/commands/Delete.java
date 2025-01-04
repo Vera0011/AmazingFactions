@@ -16,7 +16,7 @@ public class Delete implements CommandExecutor {
 
         if (currentPlayer != null) {
 
-            if (args.length != 1) {
+            if (args.length != 0) {
                 MessageHandler.sendInfoMessage(currentPlayer, "Usage: /delete");
                 return true;
             }

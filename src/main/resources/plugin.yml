@@ -6,5 +6,8 @@ commands:
   create:
     description: Creates a new faction
     permission: amazing-factions.create
+  delete:
+    description: Delete a faction
+    permission: amazing-factions.delete
 
-softdepend: [PlaceholderAPI]
+softdepend: [ PlaceholderAPI ]

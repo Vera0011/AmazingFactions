@@ -40,6 +40,7 @@ public class MainMenu implements Menu {
     @Override
     public void handle(Player player, ItemStack clicked, InventoryView currentInventory) {
         if (clicked.getType() == Material.PLAYER_HEAD) {
+            player.performCommand("amazingfactions-user-list");
             return;
         }
 

@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.vera.amazingFactions.AmazingFactions;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.interactions.menus.factions.MainMenu;
 import org.vera.amazingFactions.internal.dto.FactionDTO;
@@ -22,8 +23,10 @@ public class FactionMain implements CommandExecutor {
             FactionDTO userFaction = factionService.getFactionByLeader(currentPlayer);
 
             if (userFaction != null) {
-                UserDTO user = userService.getUser(currentPlayer.getUniqueId());
+                UserDTO user = userService.getUser(currentPlayer);
                 MainMenu menu = new MainMenu(user);
+
+                AmazingFactions.menus.add(menu);
 
                 menu.open(currentPlayer);
             }

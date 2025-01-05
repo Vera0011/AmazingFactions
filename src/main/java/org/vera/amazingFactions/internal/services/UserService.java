@@ -9,4 +9,10 @@ import java.util.UUID;
 
 public class UserService {
     private final UserDAO userDAO = new UserDAO();
+
+    public UserDTO getUser(Player player) {
+        UUID uuid = player.getUniqueId();
+
+        return userDAO.getUser(player, uuid);
+    }
 }

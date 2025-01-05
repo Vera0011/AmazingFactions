@@ -77,7 +77,7 @@ public class FactionDAO {
                         stmt.setString(1, userId.toString());
                         stmt.setString(2, currentUser.getName());
                         stmt.setInt(3, factionId);
-                        stmt.setString(4, factionDTO.getDescription());
+                        stmt.setString(4, null); // TODO - This is incorrect (used by default - Set a default rank if exists or not)
                         stmt.addBatch();
                     }
                 }

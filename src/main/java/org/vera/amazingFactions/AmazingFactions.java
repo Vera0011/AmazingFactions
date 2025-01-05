@@ -57,8 +57,6 @@ public final class AmazingFactions extends JavaPlugin {
     private void loadMenus() {
         menus = new HashSet<>();
 
-        menus.add(new MainMenu());
-
         MessageHandler.sendInfoMessage("Menus loaded");
     }
 

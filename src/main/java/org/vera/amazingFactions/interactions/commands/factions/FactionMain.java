@@ -4,13 +4,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.vera.amazingFactions.AmazingFactions;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.interactions.menus.factions.MainMenu;
 import org.vera.amazingFactions.internal.dto.FactionDTO;
+import org.vera.amazingFactions.internal.dto.UserDTO;
 import org.vera.amazingFactions.internal.services.FactionService;
+import org.vera.amazingFactions.internal.services.UserService;
 
 public class FactionMain implements CommandExecutor {
     private static FactionService factionService = new FactionService();
+    private static UserService userService = new UserService();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
@@ -19,7 +23,11 @@ public class FactionMain implements CommandExecutor {
             FactionDTO userFaction = factionService.getFactionByLeader(currentPlayer);
 
             if (userFaction != null) {
-                MainMenu menu = new MainMenu();
+                UserDTO user = userService.getUser(currentPlayer);
+                MainMenu menu = new MainMenu(user);
+
+                AmazingFactions.menus.add(menu);
+
                 menu.open(currentPlayer);
             }
 

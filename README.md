@@ -14,7 +14,7 @@ Multiple factions plugins have been created, but not like this one. This plugin 
 - [x] Create a faction (for one or multiple users)
 - [x] Delete a faction
 - [ ] List all factions
-- [ ] List all users from a faction
+- [x] List all users from a faction
 - [ ] Ranks inside factions
 - [ ] Notoriety points for each faction
 - [ ] Random events all over the map

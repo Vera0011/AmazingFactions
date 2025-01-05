@@ -17,6 +17,9 @@ public class UserDTO {
         this.factionXP = factionXP;
     }
 
+    public UserDTO() {
+    }
+
     public UUID getUuid() {
         return uuid;
     }

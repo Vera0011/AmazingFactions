@@ -6,6 +6,7 @@ import org.vera.amazingFactions.interactions.commands.factions.FactionCreate;
 import org.vera.amazingFactions.interactions.commands.factions.FactionDelete;
 import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.interactions.commands.factions.FactionMain;
+import org.vera.amazingFactions.interactions.commands.factions.FactionUserList;
 import org.vera.amazingFactions.interactions.events.InventoryClick;
 import org.vera.amazingFactions.interactions.menus.ConfirmationMenu;
 import org.vera.amazingFactions.interactions.menus.factions.MainMenu;
@@ -40,6 +41,7 @@ public final class AmazingFactions extends JavaPlugin {
     private void loadCommands() {
         Objects.requireNonNull(this.getCommand("amazingfactions-create")).setExecutor(new FactionCreate());
         Objects.requireNonNull(this.getCommand("amazingfactions-delete")).setExecutor(new FactionDelete());
+        Objects.requireNonNull(this.getCommand("amazingfactions-user-list")).setExecutor(new FactionUserList());
         Objects.requireNonNull(this.getCommand("factions")).setExecutor(new FactionMain());
 
         MessageHandler.sendInfoMessage("Commands loaded");

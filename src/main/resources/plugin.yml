@@ -9,6 +9,9 @@ commands:
   amazingfactions-delete:
     description: Delete a faction
     permission: amazingfactions.delete
+  amazingfactions-user-list:
+    description: Retrieves users from a faction
+    permission: amazingfactions.user.list
   factions:
     description: Generate the main menu for factions
     permission: amazingfactions.factions

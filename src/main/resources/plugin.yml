@@ -3,8 +3,14 @@ version: '1.0'
 main: org.vera.amazingFactions.AmazingFactions
 api-version: '1.20'
 commands:
-  create:
-    description: Adds a user to a material cooldown
-    permission: amazing-factions.create
+  amazingfactions-create:
+    description: Creates a new faction
+    permission: amazingfactions.create
+  amazingfactions-delete:
+    description: Delete a faction
+    permission: amazingfactions.delete
+  factions:
+    description: Generate the main menu for factions
+    permission: amazingfactions.factions
 
-softdepend: [PlaceholderAPI]
+softdepend: [ PlaceholderAPI ]

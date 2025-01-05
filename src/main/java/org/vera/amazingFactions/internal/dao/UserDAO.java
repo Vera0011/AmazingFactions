@@ -3,7 +3,6 @@ package org.vera.amazingFactions.internal.dao;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.AmazingFactions;
 import org.vera.amazingFactions.handlers.MessageHandler;
-import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.internal.dto.UserDTO;
 
 import java.sql.Connection;

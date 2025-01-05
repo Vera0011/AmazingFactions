@@ -1,11 +1,9 @@
-package org.vera.amazingFactions.services;
+package org.vera.amazingFactions.internal.services;
 
 import org.bukkit.entity.Player;
-import org.vera.amazingFactions.dao.FactionDAO;
-import org.vera.amazingFactions.dto.FactionDTO;
-import org.vera.amazingFactions.dto.UserDTO;
+import org.vera.amazingFactions.internal.dao.FactionDAO;
+import org.vera.amazingFactions.internal.dto.FactionDTO;
 
-import java.sql.SQLException;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,5 +21,9 @@ public class FactionService {
 
     public FactionDTO getFactionByLeader(Player actualPlayer) {
         return factionDAO.getFactionByLeader(actualPlayer, actualPlayer.getUniqueId());
+    }
+
+    public Set<FactionDTO> getFactions() {
+        return factionDAO.getFactions();
     }
 }

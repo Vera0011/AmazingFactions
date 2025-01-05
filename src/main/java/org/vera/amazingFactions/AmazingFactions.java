@@ -1,20 +1,30 @@
 package org.vera.amazingFactions;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.vera.amazingFactions.commands.Create;
-import org.vera.amazingFactions.commands.Delete;
+import org.vera.amazingFactions.interactions.commands.factions.FactionCreate;
+import org.vera.amazingFactions.interactions.commands.factions.FactionDelete;
 import org.vera.amazingFactions.handlers.MessageHandler;
+import org.vera.amazingFactions.interactions.commands.factions.FactionMain;
+import org.vera.amazingFactions.interactions.events.InventoryClick;
+import org.vera.amazingFactions.interactions.menus.ConfirmationMenu;
+import org.vera.amazingFactions.interactions.menus.factions.MainMenu;
+import org.vera.amazingFactions.interactions.menus.Menu;
 import org.vera.amazingFactions.internal.DatabaseConnector;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public final class AmazingFactions extends JavaPlugin {
     public static DatabaseConnector database;
+    public static Set<Menu> menus;
 
     @Override
     public void onEnable() {
         boolean result = this.databaseConnect();
 
+        this.loadMenus();
         this.loadCommands();
         this.loadEvents();
 
@@ -28,12 +38,26 @@ public final class AmazingFactions extends JavaPlugin {
     }
 
     private void loadCommands() {
-        Objects.requireNonNull(this.getCommand("create")).setExecutor(new Create());
-        Objects.requireNonNull(this.getCommand("delete")).setExecutor(new Delete());
+        Objects.requireNonNull(this.getCommand("amazingfactions-create")).setExecutor(new FactionCreate());
+        Objects.requireNonNull(this.getCommand("amazingfactions-delete")).setExecutor(new FactionDelete());
+        Objects.requireNonNull(this.getCommand("factions")).setExecutor(new FactionMain());
+
+        MessageHandler.sendInfoMessage("Commands loaded");
     }
 
     private void loadEvents() {
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new InventoryClick(), this);
 
+        MessageHandler.sendInfoMessage("Events loaded");
+    }
+
+    private void loadMenus() {
+        menus = new HashSet<>();
+
+        menus.add(new MainMenu());
+
+        MessageHandler.sendInfoMessage("Menus loaded");
     }
 
     /**

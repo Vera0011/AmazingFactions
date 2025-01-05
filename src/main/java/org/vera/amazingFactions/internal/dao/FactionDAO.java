@@ -1,9 +1,9 @@
-package org.vera.amazingFactions.dao;
+package org.vera.amazingFactions.internal.dao;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.AmazingFactions;
-import org.vera.amazingFactions.dto.FactionDTO;
+import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
 
 import java.sql.*;
@@ -179,5 +179,9 @@ public class FactionDAO {
                 return null;
             }
         }
+    }
+
+    public Set<FactionDTO> getFactions() {
+        return new HashSet<>();
     }
 }

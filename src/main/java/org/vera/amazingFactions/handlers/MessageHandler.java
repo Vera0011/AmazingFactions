@@ -4,10 +4,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import static org.bukkit.Bukkit.getLogger;
-import static org.bukkit.Bukkit.getServer;
 
 public class MessageHandler {
-    private static final String pluginConsolerefix = ChatColor.RED + "[AmazingFactions] - ";
+    private static final String pluginConsolerefix = "[AmazingFactions] - ";
     private static final String pluginPlayerPrefix = ChatColor.RED + "[AmazingFactions] - ";
 
     public static void sendErrorMessage(Player player, String message) {
@@ -15,7 +14,7 @@ public class MessageHandler {
     }
 
     public static void sendErrorMessage(String message) {
-        getServer().getConsoleSender().sendMessage(pluginPlayerPrefix + message);
+        getLogger().severe(pluginConsolerefix + message);
     }
 
     public static void sendWarningMessage(Player player, String message) {
@@ -23,7 +22,7 @@ public class MessageHandler {
     }
 
     public static void sendWarningMessage(String message) {
-        getServer().getConsoleSender().sendMessage(pluginPlayerPrefix + message);
+        getLogger().warning(pluginConsolerefix + message);
     }
 
     public static void sendInfoMessage(Player player, String message) {
@@ -31,6 +30,6 @@ public class MessageHandler {
     }
 
     public static void sendInfoMessage(String message) {
-        getServer().getConsoleSender().sendMessage(pluginPlayerPrefix + ChatColor.AQUA + message + ChatColor.RESET);
+        getLogger().info(pluginConsolerefix + message);
     }
 }

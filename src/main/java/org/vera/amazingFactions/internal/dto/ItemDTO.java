@@ -1,4 +1,4 @@
-package org.vera.amazingFactions.dto;
+package org.vera.amazingFactions.internal.dto;
 
 public class ItemDTO {
     private int id;

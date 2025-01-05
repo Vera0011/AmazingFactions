@@ -21,7 +21,7 @@ public class UserListMenu implements Menu {
         int invSlot = 0;
 
         for (UserDTO user : userList) {
-            Menu.setCustomValues(Material.PLAYER_HEAD, inventory, invSlot, ChatColor.GREEN + user.getUserName(), ChatColor.AQUA + user.getfactionRank());
+            Menu.setCustomValues(Material.PLAYER_HEAD, inventory, invSlot, ChatColor.GREEN + user.getUserName(), ChatColor.AQUA + user.getfactionRank(), user);
             invSlot++;
         }
     }

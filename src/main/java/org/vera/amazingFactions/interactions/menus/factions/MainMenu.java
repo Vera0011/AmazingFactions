@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.vera.amazingFactions.AmazingFactions;
 import org.vera.amazingFactions.interactions.menus.ConfirmationMenu;
 import org.vera.amazingFactions.interactions.menus.Menu;
+import org.vera.amazingFactions.internal.dto.UserDTO;
 
 /**
  * Main menu (for the leader of the faction)
@@ -24,12 +25,14 @@ public class MainMenu implements Menu {
                 inventory.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
             }
         }
+        Menu.setCustomValues(Material.WRITABLE_BOOK, inventory, 12, ChatColor.GREEN + "Add New User", ChatColor.AQUA + "Add a new user to the faction", null);
+        Menu.setCustomValues(Material.BARRIER, inventory, 21, ChatColor.GREEN + "Remove User", ChatColor.RED + "This action will permanently remove a user from your faction", null);
+        Menu.setCustomValues(Material.BOOK, inventory, 14, ChatColor.GREEN + "Display Stats", ChatColor.AQUA + "Display stats of the current faction", null);
+        Menu.setCustomValues(Material.TNT, inventory, 25, ChatColor.GREEN + "Remove Faction", ChatColor.RED + "This action will permanently remove the faction", null);
+    }
 
-        Menu.setCustomValues(Material.PLAYER_HEAD, inventory, 10, ChatColor.GREEN + "Display Users", ChatColor.AQUA + "Display members of the current faction");
-        Menu.setCustomValues(Material.WRITABLE_BOOK, inventory, 12, ChatColor.GREEN + "Add New User", ChatColor.AQUA + "Add a new user to the faction");
-        Menu.setCustomValues(Material.BARRIER, inventory, 21, ChatColor.GREEN + "Remove User", ChatColor.RED + "This action will permanently remove a user from your faction");
-        Menu.setCustomValues(Material.BOOK, inventory, 14, ChatColor.GREEN + "Display Stats", ChatColor.AQUA + "Display stats of the current faction");
-        Menu.setCustomValues(Material.TNT, inventory, 25, ChatColor.GREEN + "Remove Faction", ChatColor.RED + "This action will permanently remove the faction");
+    public MainMenu(UserDTO currentUser) {
+        Menu.setCustomValues(Material.PLAYER_HEAD, inventory, 10, ChatColor.GREEN + "Display Users", ChatColor.AQUA + "Display members of the current faction", currentUser);
     }
 
     @Override

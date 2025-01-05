@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.vera.amazingFactions.AmazingFactions;
 
 public class ConfirmationMenu implements Menu {
     private static String title = ChatColor.RED + "Amazing Factions - Confirmation";
@@ -18,8 +19,8 @@ public class ConfirmationMenu implements Menu {
             inventory.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
         }
 
-        Menu.setCustomValues(Material.LIME_WOOL, inventory, 3, ChatColor.GREEN + "Confirm action", ChatColor.AQUA + "Confirm and proceed with a specific action");
-        Menu.setCustomValues(Material.RED_WOOL, inventory, 5, ChatColor.GREEN + "Abort", ChatColor.RED + "Abort action");
+        Menu.setCustomValues(Material.LIME_WOOL, inventory, 3, ChatColor.GREEN + "Confirm action", ChatColor.AQUA + "Confirm and proceed with a specific action", null);
+        Menu.setCustomValues(Material.RED_WOOL, inventory, 5, ChatColor.GREEN + "Abort", ChatColor.RED + "Abort action", null);
     }
 
     public ConfirmationMenu(Menu parent) {
@@ -45,6 +46,7 @@ public class ConfirmationMenu implements Menu {
         if (clickedItem.getType() == Material.LIME_WOOL) {
             currentInventory.close();
             this.parentMenu.executeConfirmation(player, this);
+            AmazingFactions.menus.remove(this);
             return;
         }
 

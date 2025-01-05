@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
-import org.vera.amazingFactions.services.FactionService;
+import org.vera.amazingFactions.internal.services.FactionService;
 
 public class FactionDelete implements CommandExecutor {
     private static FactionService factionService = new FactionService();

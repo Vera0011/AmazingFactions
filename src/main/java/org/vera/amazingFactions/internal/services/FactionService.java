@@ -1,4 +1,4 @@
-package org.vera.amazingFactions.services;
+package org.vera.amazingFactions.internal.services;
 
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.internal.dao.FactionDAO;

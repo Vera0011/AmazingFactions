@@ -8,22 +8,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-
 public class ConfirmationMenu implements Menu {
     private static String title = ChatColor.RED + "Amazing Factions - Confirmation";
     public static Inventory inventory = Bukkit.createInventory(null, 9, title);
+    private Menu parentMenu;
 
     static {
-        ArrayList<String> customLoreEmeraldBlock = new ArrayList<>();
-        ArrayList<String> customLoreRedstoneBlock = new ArrayList<>();
+        Menu.setCustomValues(Material.EMERALD_BLOCK, inventory, 3, ChatColor.GREEN + "Confirm action", ChatColor.AQUA + "Confirm and proceed with a specific action");
+        Menu.setCustomValues(Material.REDSTONE_BLOCK, inventory, 4, ChatColor.GREEN + "Abort", ChatColor.RED + "Abort confirmation");
+    }
 
-        customLoreEmeraldBlock.add(ChatColor.AQUA + "Confirm and proceed with a specific action");
-        customLoreRedstoneBlock.add(ChatColor.RED + "Abort confirmation");
-
-        Menu.setCustomValues(Material.EMERALD_BLOCK, inventory, 3, ChatColor.GREEN + "Confirm action", customLoreEmeraldBlock);
-        Menu.setCustomValues(Material.REDSTONE_BLOCK, inventory, 4, ChatColor.GREEN + "Abort", customLoreRedstoneBlock);
+    public ConfirmationMenu(Menu parent) {
+        this.parentMenu = parent;
     }
 
     @Override
@@ -37,8 +33,14 @@ public class ConfirmationMenu implements Menu {
     }
 
     @Override
-    public void handle(Player player, ItemStack clickedItem, InventoryView currentInventory, @Nullable String source) {
+    public void executeConfirmation(Player player, Menu sourceMenu) {
+    }
+
+    @Override
+    public void handle(Player player, ItemStack clickedItem, InventoryView currentInventory) {
         if (clickedItem.getType() == Material.EMERALD_BLOCK) {
+            currentInventory.close();
+            this.parentMenu.executeConfirmation(player, this);
             return;
         }
 

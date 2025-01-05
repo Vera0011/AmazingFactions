@@ -25,7 +25,7 @@ public class InventoryClick implements Listener {
         for (Menu menu : AmazingFactions.menus) {
             if (currentInventory.getTitle().equals(menu.getTitle())) {
                 event.setCancelled(true);
-                menu.handle(player, clicked, currentInventory, null);
+                menu.handle(player, clicked, currentInventory);
                 break;
             }
         }

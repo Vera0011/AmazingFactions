@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.handlers.MessageHandler;
-import org.vera.amazingFactions.interactions.menus.MainMenu;
+import org.vera.amazingFactions.interactions.menus.factions.MainMenu;
 import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.services.FactionService;
 

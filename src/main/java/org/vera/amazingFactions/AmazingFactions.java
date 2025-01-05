@@ -8,7 +8,7 @@ import org.vera.amazingFactions.handlers.MessageHandler;
 import org.vera.amazingFactions.interactions.commands.factions.FactionMain;
 import org.vera.amazingFactions.interactions.events.InventoryClick;
 import org.vera.amazingFactions.interactions.menus.ConfirmationMenu;
-import org.vera.amazingFactions.interactions.menus.MainMenu;
+import org.vera.amazingFactions.interactions.menus.factions.MainMenu;
 import org.vera.amazingFactions.interactions.menus.Menu;
 import org.vera.amazingFactions.internal.DatabaseConnector;
 
@@ -56,7 +56,6 @@ public final class AmazingFactions extends JavaPlugin {
         menus = new HashSet<>();
 
         menus.add(new MainMenu());
-        menus.add(new ConfirmationMenu());
 
         MessageHandler.sendInfoMessage("Menus loaded");
     }

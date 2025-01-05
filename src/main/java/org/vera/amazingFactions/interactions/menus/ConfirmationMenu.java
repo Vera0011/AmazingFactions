@@ -14,8 +14,12 @@ public class ConfirmationMenu implements Menu {
     private Menu parentMenu;
 
     static {
-        Menu.setCustomValues(Material.EMERALD_BLOCK, inventory, 3, ChatColor.GREEN + "Confirm action", ChatColor.AQUA + "Confirm and proceed with a specific action");
-        Menu.setCustomValues(Material.REDSTONE_BLOCK, inventory, 4, ChatColor.GREEN + "Abort", ChatColor.RED + "Abort confirmation");
+        for (int i = 0; i < inventory.getSize(); i++) {
+            inventory.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
+        }
+
+        Menu.setCustomValues(Material.LIME_WOOL, inventory, 3, ChatColor.GREEN + "Confirm action", ChatColor.AQUA + "Confirm and proceed with a specific action");
+        Menu.setCustomValues(Material.RED_WOOL, inventory, 5, ChatColor.GREEN + "Abort", ChatColor.RED + "Abort action");
     }
 
     public ConfirmationMenu(Menu parent) {
@@ -38,13 +42,13 @@ public class ConfirmationMenu implements Menu {
 
     @Override
     public void handle(Player player, ItemStack clickedItem, InventoryView currentInventory) {
-        if (clickedItem.getType() == Material.EMERALD_BLOCK) {
+        if (clickedItem.getType() == Material.LIME_WOOL) {
             currentInventory.close();
             this.parentMenu.executeConfirmation(player, this);
             return;
         }
 
-        if (clickedItem.getType() == Material.REDSTONE_BLOCK) {
+        if (clickedItem.getType() == Material.RED_WOOL) {
             player.closeInventory();
         }
     }

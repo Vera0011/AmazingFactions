@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.vera.amazingFactions.AmazingFactions;
 import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
+import org.vera.amazingFactions.internal.dto.UserDTO;
 
 import java.sql.*;
 import java.util.*;
@@ -77,6 +78,7 @@ public class FactionDAO {
                         stmt.setString(2, currentUser.getName());
                         stmt.setInt(3, factionId);
                         stmt.setString(4, factionDTO.getDescription());
+                        stmt.addBatch();
                     }
                 }
             }
@@ -157,31 +159,82 @@ public class FactionDAO {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    factionDTO = new FactionDTO();
-                    factionDTO.setId(resultSet.getInt("id"));
-                    factionDTO.setName(resultSet.getString("name"));
-                    factionDTO.setLeader(UUID.fromString(resultSet.getString("leaderId")));
-
-                    return factionDTO;
+                    return getFactionDTO(resultSet);
                 } else {
                     MessageHandler.sendErrorMessage(actualPlayer, "You are not the leader of a faction");
                     return null;
                 }
             }
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-                MessageHandler.sendErrorMessage(actualPlayer, "Unable to retrieve the faction");
-                return null;
-            } catch (SQLException ex) {
-                MessageHandler.sendErrorMessage(actualPlayer, "Internal error with database");
-                MessageHandler.sendErrorMessage("Internal error with database - " + ex.getMessage());
-                return null;
-            }
+            MessageHandler.sendErrorMessage(actualPlayer, "Unable to retrieve the faction");
+            return null;
         }
     }
 
-    public Set<FactionDTO> getFactions() {
-        return new HashSet<>();
+    public Set<UserDTO> getUsers(Player actualPlayer, FactionDTO faction) {
+        String query = "SELECT * FROM Users WHERE factionId = ?";
+        Set<UserDTO> users = new HashSet<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, faction.getId());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    UserDTO user = new UserDTO();
+
+                    user.setFaction(resultSet.getInt("factionId"));
+                    user.setUserName(resultSet.getString("userName"));
+                    user.setfactionRank(resultSet.getString("factionRank"));
+                    user.setfactionXP(resultSet.getInt("factionXP"));
+                    user.setUuid(UUID.fromString(resultSet.getString("id")));
+
+                    users.add(user);
+                }
+            }
+
+            if (users.isEmpty()) {
+                MessageHandler.sendErrorMessage(actualPlayer, "No users found");
+            }
+
+            return users;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            MessageHandler.sendErrorMessage(actualPlayer, "Unable to retrieve the faction");
+            return null;
+        }
+    }
+
+    // Retrieves the fraction of a player
+    public FactionDTO getFaction(Player actualPlayer) {
+        String query = "SELECT Factions.id, Factions.name, Factions.leaderId, Factions.description FROM Factions INNER JOIN Users ON Factions.id = Users.factionId WHERE Users.id = ?";
+        FactionDTO factionDTO;
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, actualPlayer.getUniqueId().toString());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return getFactionDTO(resultSet);
+                } else {
+                    MessageHandler.sendErrorMessage(actualPlayer, "You are not in a faction");
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            MessageHandler.sendErrorMessage(actualPlayer, "Unable to retrieve the faction");
+            return null;
+        }
+    }
+
+    /* Transforms the data from result to a valid FactionDTO */
+    private FactionDTO getFactionDTO(ResultSet resultSet) throws SQLException {
+        FactionDTO factionDTO;
+        factionDTO = new FactionDTO();
+        factionDTO.setId(resultSet.getInt("id"));
+        factionDTO.setName(resultSet.getString("name"));
+        factionDTO.setDescription(resultSet.getString("description"));
+        factionDTO.setLeader(UUID.fromString(resultSet.getString("leaderId")));
+
+        return factionDTO;
     }
 }

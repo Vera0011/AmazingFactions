@@ -13,7 +13,7 @@ Multiple factions plugins have been created, but not like this one. This plugin 
 ## Features list
 - [x] Create a faction (for one or multiple users)
 - [x] Delete a faction
-- [ ] List all factions
+- [x] List all factions
 - [x] List all users from a faction
 - [ ] Ranks inside factions
 - [ ] Notoriety points for each faction

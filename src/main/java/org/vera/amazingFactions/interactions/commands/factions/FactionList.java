@@ -6,15 +6,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.vera.amazingFactions.AmazingFactions;
-import org.vera.amazingFactions.interactions.menus.users.UserListMenu;
+import org.vera.amazingFactions.interactions.menus.factions.FactionListMenu;
 import org.vera.amazingFactions.internal.dto.FactionDTO;
 import org.vera.amazingFactions.handlers.MessageHandler;
-import org.vera.amazingFactions.internal.dto.UserDTO;
 import org.vera.amazingFactions.internal.services.FactionService;
 
 import java.util.Set;
 
-public class FactionUserList implements CommandExecutor {
+public class FactionList implements CommandExecutor {
     private static FactionService factionService = new FactionService();
 
     @Override
@@ -22,16 +21,12 @@ public class FactionUserList implements CommandExecutor {
         if (sender instanceof Player) {
             Player currentPlayer = (Player) sender;
 
-            FactionDTO currentFaction = factionService.getFaction(currentPlayer);
+            Set<FactionDTO> factionList = factionService.getFactions(currentPlayer);
 
-            if (currentFaction != null) {
-                Set<UserDTO> factionUsers = factionService.getUsers(currentPlayer, currentFaction);
-
-                if (factionUsers != null && !factionUsers.isEmpty()) {
-                    UserListMenu menu = new UserListMenu(factionUsers);
-                    AmazingFactions.menus.add(menu);
-                    menu.open(currentPlayer);
-                }
+            if (factionList != null && !factionList.isEmpty()) {
+                FactionListMenu menu = new FactionListMenu(factionList);
+                AmazingFactions.menus.add(menu);
+                menu.open(currentPlayer);
             }
 
             return true;

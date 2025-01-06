@@ -28,6 +28,7 @@ public class MainMenu implements Menu {
 
         Menu.setCustomValues(Material.WRITABLE_BOOK, inventory, 12, ChatColor.GREEN + "Add New User", ChatColor.AQUA + "Add a new user to the faction", null);
         Menu.setCustomValues(Material.BARRIER, inventory, 21, ChatColor.GREEN + "Remove User", ChatColor.RED + "This action will permanently remove a user from your faction", null);
+        Menu.setCustomValues(Material.BLACK_BANNER, inventory, 23, ChatColor.GREEN + "Display factions", ChatColor.RED + "Display all the factions of the server", null);
         Menu.setCustomValues(Material.BOOK, inventory, 14, ChatColor.GREEN + "Display Stats", ChatColor.AQUA + "Display stats of the current faction", null);
         Menu.setCustomValues(Material.TNT, inventory, 25, ChatColor.GREEN + "Remove Faction", ChatColor.RED + "This action will permanently remove the faction", null);
     }
@@ -57,6 +58,11 @@ public class MainMenu implements Menu {
         }
 
         if (clicked.getType() == Material.BOOK) {
+            return;
+        }
+
+        if (clicked.getType() == Material.BLACK_BANNER) {
+            player.performCommand("amazingfactions-list");
             return;
         }
 

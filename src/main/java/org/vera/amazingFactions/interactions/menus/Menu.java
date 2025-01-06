@@ -1,14 +1,18 @@
 package org.vera.amazingFactions.interactions.menus;
 
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.banner.Pattern;
+import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.vera.amazingFactions.internal.dto.UserDTO;
@@ -43,6 +47,12 @@ public interface Menu {
 
         if (material == Material.PLAYER_HEAD && user != null) {
             setCustomSkull(item, user);
+        }
+
+        if (material == Material.BLACK_BANNER) {
+            BannerMeta bannerMeta = (BannerMeta) item.getItemMeta();
+            bannerMeta.addPattern(new Pattern(DyeColor.RED, PatternType.STRIPE_MIDDLE));
+            item.setItemMeta(bannerMeta);
         }
 
         currentInventory.setItem(position, item);

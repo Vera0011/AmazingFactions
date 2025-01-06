@@ -12,6 +12,9 @@ commands:
   amazingfactions-user-list:
     description: Retrieves users from a faction
     permission: amazingfactions.user.list
+  amazingfactions-list:
+    description: Retrieves all factions in the server
+    permission: amazingfactions.user.list
   factions:
     description: Generate the main menu for factions
     permission: amazingfactions.factions

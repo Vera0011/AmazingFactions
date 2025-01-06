@@ -31,4 +31,8 @@ public class FactionService {
     public FactionDTO getFaction(Player actualPlayer) {
         return factionDAO.getFaction(actualPlayer);
     }
+
+    public Set<FactionDTO> getFactions(Player actualPlayer) {
+        return factionDAO.getFactions(actualPlayer);
+    }
 }

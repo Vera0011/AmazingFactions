@@ -27,7 +27,7 @@ public class FactionUserList implements CommandExecutor {
             if (currentFaction != null) {
                 Set<UserDTO> factionUsers = factionService.getUsers(currentPlayer, currentFaction);
 
-                if (factionUsers != null) {
+                if (factionUsers != null && !factionUsers.isEmpty()) {
                     UserListMenu menu = new UserListMenu(factionUsers);
                     AmazingFactions.menus.add(menu);
                     menu.open(currentPlayer);

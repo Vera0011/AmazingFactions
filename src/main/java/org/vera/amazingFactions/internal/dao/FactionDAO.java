@@ -171,6 +171,12 @@ public class FactionDAO {
         }
     }
 
+    /**
+     * Returns all the users from a specific faction
+     * @param actualPlayer
+     * @param faction
+     * @return
+     */
     public Set<UserDTO> getUsers(Player actualPlayer, FactionDTO faction) {
         String query = "SELECT * FROM Users WHERE factionId = ?";
         Set<UserDTO> users = new HashSet<>();
@@ -226,10 +232,41 @@ public class FactionDAO {
         }
     }
 
+    /**
+     * Returns all the factions on the server
+     *
+     * @param actualPlayer
+     * @return
+     */
+    public Set<FactionDTO> getFactions(Player actualPlayer) {
+        String query = "SELECT * FROM Factions";
+        Set<FactionDTO> factions = new HashSet<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    FactionDTO user = getFactionDTO(resultSet);
+
+                    factions.add(user);
+                }
+            }
+
+            if (factions.isEmpty()) {
+                MessageHandler.sendErrorMessage(actualPlayer, "No factions found");
+            }
+
+            return factions;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            MessageHandler.sendErrorMessage(actualPlayer, "Unable to retrieve the faction");
+            return null;
+        }
+    }
+
     /* Transforms the data from result to a valid FactionDTO */
     private FactionDTO getFactionDTO(ResultSet resultSet) throws SQLException {
-        FactionDTO factionDTO;
-        factionDTO = new FactionDTO();
+        FactionDTO factionDTO = new FactionDTO();
+
         factionDTO.setId(resultSet.getInt("id"));
         factionDTO.setName(resultSet.getString("name"));
         factionDTO.setDescription(resultSet.getString("description"));

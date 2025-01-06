@@ -21,13 +21,12 @@ public class FactionList implements CommandExecutor {
         if (sender instanceof Player) {
             Player currentPlayer = (Player) sender;
 
-            Set<FactionDTO> factionList = factionService.getFactionList(currentPlayer);
+            Set<FactionDTO> factionList = factionService.getFactions(currentPlayer);
 
-            if (factionList != null) {
+            if (factionList != null && !factionList.isEmpty()) {
                 FactionListMenu menu = new FactionListMenu(factionList);
                 AmazingFactions.menus.add(menu);
                 menu.open(currentPlayer);
-
             }
 
             return true;

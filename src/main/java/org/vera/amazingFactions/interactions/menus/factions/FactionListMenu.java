@@ -28,7 +28,7 @@ public class FactionListMenu implements Menu {
 
         for (FactionDTO faction : factionList) {
             if (invSlot > 9 || invSlot < 26 && invSlot > 35 || invSlot != 17 || invSlot != 18) {
-                Menu.setCustomValues(Material.PLAYER_HEAD, inventory, invSlot, ChatColor.GREEN + faction.getName(), ChatColor.AQUA + faction.getDescription(), null);
+                Menu.setCustomValues(Material.BLACK_BANNER, inventory, invSlot, ChatColor.GREEN + faction.getName(), ChatColor.AQUA + faction.getDescription(), null);
                 invSlot++;
             }
         }
